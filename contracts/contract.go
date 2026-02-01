@@ -1,6 +1,7 @@
 package contracts
 
-type storage interface {
-	Save(string) error
+type Storage interface {
+	Save(string)
+
 	Load(string) ([]byte, error)
 }
