@@ -1,9 +1,7 @@
 package main
 
 import (
-	cat "ToDo/category"
-	task "ToDo/task"
-	user "ToDo/user"
+	cat "ToDo/entity"
 	"bufio"
 	"fmt"
 	"log"
@@ -32,18 +30,18 @@ func main() {
 func getCommand(command string) {
 	switch command {
 	case "register":
-		user.User{}.RegisterUserMethod()
+		cat.User{}.RegisterUserMethod()
 	case "create-category":
 		cat.Category{}.CreateCategory()
 	case "login":
-		lErr, _ := user.User{}.LoginUser()
+		lErr, _ := cat.User{}.LoginUser()
 		if lErr != nil {
 			fmt.Println(lErr)
 			log.Fatalf(lErr.Error())
 		}
 	case "create-task":
 	case "exit":
-		task.Task{}.CreatTask()
+		cat.Task{}.CreatTask()
 		os.Exit(0)
 	default:
 		fmt.Println("Invalid command")

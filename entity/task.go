@@ -1,4 +1,4 @@
-package task
+package entity
 
 type Task struct {
 	Id           int

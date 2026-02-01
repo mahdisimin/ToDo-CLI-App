@@ -1,4 +1,4 @@
-package category
+package entity
 
 type Category struct {
 	Id    int
