@@ -8,7 +8,6 @@ func (m *InMemoryMap) Save(string2 string) {
 	println(string2)
 }
 
-func (m *InMemoryMap) Load(string) ([]byte, error) {
+func (m *InMemoryMap) Load(string) {
 
-	return _, nil
 }

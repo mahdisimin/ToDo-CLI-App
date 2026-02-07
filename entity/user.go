@@ -1,11 +1,10 @@
 package entity
 
 import (
-	"ToDo/contracts"
+	"ToDo/storage"
 	"ToDo/utils"
 	"bufio"
-	"encoding/json"
-	"flag"
+	"fmt"
 	"os"
 )
 
@@ -16,26 +15,22 @@ type User struct {
 	Password string
 }
 
-const path = "user//userList.txt"
-
-func (user User) RegisterUserMethod(storage contracts.Storage) {
-	flag.Parse()
+func NewUser() (User, error) {
+	user := User{}
+	fileHandler := storage.FileHandler{}
+	_, userCount, _ := fileHandler.Load("User")
 	scanner := bufio.NewScanner(os.Stdin)
-	userCount := user.load
-	println("Please enter your name: ")
+	fmt.Println("Please enter your name: ")
 	scanner.Scan()
 	user.Name = scanner.Text()
-	println("Please enter your email: ")
+	fmt.Println("Please enter your email: ")
 	scanner.Scan()
 	user.Email = scanner.Text()
-	println("Please enter your password: ")
+	fmt.Println("Please enter your password: ")
 	scanner.Scan()
 	rawPassword := scanner.Text()
 	password, _ := utils.HashPasswordMD5(rawPassword)
 	user.Password = password
-	user.Id = userCount
-
-	jDataBite, _ := json.Marshal(user)
-	jDataString := string(jDataBite)
-	storage.Save(jDataString)
+	user.Id = userCount + 1
+	return user, nil
 }

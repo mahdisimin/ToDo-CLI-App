@@ -1,6 +1,0 @@
-{"Id":1,"Name":"sdcsd","Email":"scsdc","Password":"acdsc"}
-{"Id":2,"Name":"sdcsd","Email":"dfvdfv","Password":"sscsd"}
-{"Id":3,"Name":"mahdi","Email":"mahdi@gmail.com","Password":"e10adc3949ba59abbe56e057f20f883e"}
-{"Id":4,"Name":"mahdi","Email":"simin@gmail.com","Password":"313233343536"}
-{"Id":5,"Name":"sdsd","Email":"sdcs","Password":"24696d696e3133343930363138"}
-{"Id":6,"Name":"sdc","Email":"sdcsd","Password":"6a6373756863737564696368756f5c6e"}

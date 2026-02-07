@@ -1,28 +1,29 @@
 package main
 
 import (
+	"ToDo/app"
 	"ToDo/entity"
 	"ToDo/storage"
 	"bufio"
+	"fmt"
 	"os"
 )
 
-var inMemoryStorage = &storage.InMemoryMap{}
-
 func main() {
+	application := app.App{
+		Storage: storage.FileHandler{},
+	}
 	command := getCommand()
-
 	switch command {
 	case "register":
-		entity.User{}.RegisterUserMethod(inMemoryStorage)
-	case "register_new":
+		user, _ := entity.NewUser()
+		application.PersistEntity(user)
 	}
-	return
 }
 
 func getCommand() string {
 	scanner := bufio.NewScanner(os.Stdin)
-	println("Enter command: ")
+	fmt.Println("Enter command: ")
 	scanner.Scan()
 	command := scanner.Text()
 	return command
