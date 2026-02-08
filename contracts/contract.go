@@ -8,7 +8,7 @@ type Logger interface {
 }
 
 const (
-	UserFilePath     = ".//userList.text"
+	UserFilePath     = ".//userList.tex"
 	TaskFilePath     = ".//TaskList.text"
 	CategoryFilePath = ".//CategoryList.text"
 )
