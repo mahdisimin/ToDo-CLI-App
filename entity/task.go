@@ -1,12 +1,12 @@
 package entity
 
 type Task struct {
-	Id           int
-	TaskName     string
-	TaskDueDate  string
-	TaskCategory string
-	TaskStatus   string
-	UserID       int
+	Id         int
+	Name       string
+	DueDate    string
+	CategoryID int
+	Status     string
+	UserID     int
 }
 
 func (task Task) CreatTask() {

@@ -34,9 +34,9 @@ func (file FileHandler) Load(entity string) (string, int, error) {
 	switch entity {
 	case "User":
 		file.path = contracts.UserFilePath
-	case "task":
+	case "Task":
 		file.path = contracts.TaskFilePath
-	case "category":
+	case "Category":
 		file.path = contracts.CategoryFilePath
 
 	}
@@ -52,4 +52,30 @@ func (file FileHandler) Load(entity string) (string, int, error) {
 	dataSlice := strings.Split(dataSting, "\n")
 	dataCount := len(dataSlice)
 	return dataSting, dataCount, nil
+}
+
+func (file FileHandler) IsExists(entity string, attrib ...any) (bool, error) {
+	var dataByte = make([]byte, 1024)
+	switch entity {
+	case "User":
+		file.path = contracts.UserFilePath
+	case "Task":
+		file.path = contracts.TaskFilePath
+	case "Category":
+		file.path = contracts.CategoryFilePath
+
+	}
+	f, oErr := os.OpenFile(file.path, os.O_RDONLY, 0777)
+	if oErr != nil {
+		return false, errors.New(oErr.Error())
+	}
+	defer f.Close()
+	dataLength, _ := f.Read(dataByte)
+	dataByte = dataByte[:dataLength-1]
+	dataSting := string(dataByte)
+	dataSting = strings.Trim(dataSting, "\n")
+	dataSlice := strings.Split(dataSting, "\n")
+	print(dataSlice)
+
+	return true, nil
 }
