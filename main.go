@@ -18,7 +18,11 @@ func main() {
 	case "register":
 		user, _ := entity.NewUser()
 		application.PersistEntity(user)
+	case "add-category":
+		category, _ := entity.CreateCategory()
+		application.PersistEntity(category)
 	}
+
 }
 
 func getCommand() string {
