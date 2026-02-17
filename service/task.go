@@ -6,11 +6,11 @@ import (
 )
 
 type TaskServiceRepository interface {
-	UserHaveThisCategory(userId int, categoryId int) bool
 	PersistTask(entity.Task) (entity.Task, error)
 }
-type task struct {
-	Repository TaskServiceRepository
+type Task struct {
+	TaskRepository     TaskServiceRepository
+	CategoryRepository CategoryServiceRepository
 }
 
 type CreatTaskRequest struct {
@@ -25,12 +25,13 @@ type CreatTaskResponse struct {
 	MetaData string
 }
 
-func (t task) CreateTask(req CreatTaskRequest) (CreatTaskResponse, error) {
+func (t Task) CreateTask(req CreatTaskRequest) (CreatTaskResponse, error) {
 
-	ok := t.Repository.UserHaveThisCategory(req.AuthenticatedUserID, req.CategoryID)
+	ok := t.CategoryRepository.UserHaveThisCategory(req.AuthenticatedUserID, req.CategoryID)
 	if !ok {
-		return CreatTaskResponse{}, errors.New("User Not Have This Cateogry")
+		return CreatTaskResponse{}, errors.New("user not have this category")
 	}
+
 	task := entity.Task{
 		Id:         0,
 		Name:       req.Name,
@@ -40,7 +41,7 @@ func (t task) CreateTask(req CreatTaskRequest) (CreatTaskResponse, error) {
 		UserID:     req.AuthenticatedUserID,
 	}
 
-	persistedTask, _ := t.Repository.PersistTask(task)
+	persistedTask, _ := t.TaskRepository.PersistTask(task)
 
 	result := CreatTaskResponse{
 		Task:     persistedTask,
